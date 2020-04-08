@@ -1,0 +1,30 @@
+﻿-- RSS Feeds parsing
+	CommitStrip RSS
+	JRE Podcast RSS
+
+	Ability to add/remove new RSS Feed tab?
+
+
+--News
+	NYT? 
+	WallStJournal?
+	RSS Feed/article link feed
+
+
+-- Stock Ticker on bottom
+	VTI,
+	TSLA,
+	ACB
+	Last price, Up/Down %, 
+
+		-- Poss extension
+			52wk high/low
+			volume
+			50-day moving average info
+				?Costbasis calculator
+
+--News ticker?
+	ESPN Ticker simulation
+		Two sentences, one fades away
+		"header", "subtext 1, subtext2"
+		Circular List, rotate through, with animations
