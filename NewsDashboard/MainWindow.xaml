@@ -3,7 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NewsDashboard" xmlns:news="clr-namespace:NewsDashboard.News"
+        xmlns:local="clr-namespace:NewsDashboard" 
+        xmlns:news="clr-namespace:NewsDashboard.News"
+        xmlns:rss="clr-namespace:NewsDashboard.RSS"
+        xmlns:about="clr-namespace:NewsDashboard.About"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -16,9 +19,11 @@
                 <TabItem.Header>
                     RSS/Comics
                 </TabItem.Header>
+                <rss:RSSFeeds_View></rss:RSSFeeds_View>
             </TabItem>
             <TabItem>
                 <TabItem.Header>About</TabItem.Header>
+                <about:About_View></about:About_View>
             </TabItem>
         </TabControl>
     </Grid>

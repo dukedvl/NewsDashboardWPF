@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,18 +11,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NewsDashboard.RSS
+namespace NewsDashboard.About
 {
     /// <summary>
-    /// Interaction logic for RSSFeeds.xaml
+    /// Interaction logic for About_View.xaml
     /// </summary>
-    public partial class RSSFeeds_View : UserControl
+    public partial class About_View : UserControl
     {
-        public RSSFeeds_View()
+        public About_View()
         {
             InitializeComponent();
         }
-
- 
     }
 }
