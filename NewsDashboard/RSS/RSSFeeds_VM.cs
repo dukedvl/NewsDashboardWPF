@@ -2,11 +2,14 @@
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Windows.Input;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace NewsDashboard.RSS
 {
@@ -20,15 +23,15 @@ namespace NewsDashboard.RSS
         {
             get;
             set;
-        }= "http://blog.cleancoder.com/atom.xml";
+        } = "http://blog.cleancoder.com/atom.xml";
 
-        public List<SyndicationItem> FeedItems
+        public ObservableCollection<FeedItemModel> FeedItems
         {
             get;
             set;
-        }
-        
-        public SyndicationItem SelectedFeedItem
+        } = new ObservableCollection<FeedItemModel>();
+
+        public FeedItemModel SelectedFeedItem
         {
             get;
             set;
@@ -50,14 +53,36 @@ namespace NewsDashboard.RSS
 
         private void LoadAction()
         {
+            FeedItems?.Clear();
+            SelectedFeedItem = null;
+
             using (XmlReader reader = XmlReader.Create(FeedURL))
             {
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
-                FeedItems = feed.Items.ToList();
+
+                //Next step, getting Images from Comic feeds/etc.
+                foreach (SyndicationItem item in feed.Items)
+                {
+                    FeedItemModel model = new FeedItemModel()
+                    {
+                        FeedItem = item
+                    };
+
+                    model.ImageURL =
+                        (from SyndicationElementExtension ext in item.ElementExtensions
+                         let Extension = ext.GetObject<XElement>()
+                         where Extension?.Name?.LocalName == "encoded" &&
+                         !string.IsNullOrEmpty(Extension?.Value)
+                         select Extension.Value).FirstOrDefault();
+
+                    FeedItems.Add(model);
+                }
             }
-            
+
+            OnPropertyChanged(nameof(FeedItems));
+
         }
         #endregion
-
+      
     }
 }

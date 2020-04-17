@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NewsDashboard.RSS"
-             xmlns:syn="clr-namespace:System.ServiceModel.Syndication;assembly=System.ServiceModel.Syndication"
              xmlns:attached="clr-namespace:NewsDashboard.AttachedProperties"
+             xmlns:chrome="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf" xmlns:cefsharp="clr-namespace:CefSharp;assembly=CefSharp.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" 
              d:DataContext="{d:DesignInstance Type=local:RSSFeeds_VM, IsDesignTimeCreatable=True}">
@@ -18,10 +18,11 @@
         <Style TargetType="ListView">
             <Setter Property="ItemTemplate">
                 <Setter.Value>
-                    <DataTemplate DataType="{x:Type syn:SyndicationItem}">
+                    <DataTemplate DataType="{x:Type local:FeedItemModel}">
                         <StackPanel>
-                            <TextBlock Text="{Binding Title.Text}"/>
-                            <TextBlock><Hyperlink NavigateUri="{Binding Id}">Link</Hyperlink></TextBlock>
+                            <TextBlock Text="{Binding FeedItem.Title.Text}"/>
+                            <TextBlock><Hyperlink NavigateUri="{Binding FeedItem.Id}" RequestNavigate="Hyperlink_RequestNavigate">Link</Hyperlink> (<Run FontSize="10" FontStyle="Italic" Text="{Binding FeedItem.LastUpdatedTime.LocalDateTime, Mode=OneWay}"/>)</TextBlock>
+
                         </StackPanel>
                     </DataTemplate>
                 </Setter.Value>
@@ -31,6 +32,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition Width="5"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -41,20 +43,40 @@
         <TextBlock FontSize="24" Text="{Binding Title}"/>
 
         <StackPanel Grid.Row="1">
+
             <StackPanel HorizontalAlignment="Stretch">
                 <Label Content="Feed:" Margin="5"/>
                 <TextBox Text="{Binding FeedURL}" Margin="5" HorizontalAlignment="Stretch"/>
             </StackPanel>
+
             <Button Command="{Binding LoadFeed}" Content="Load Feed" 
                     Margin="5" MinWidth="75" MaxWidth="150"/>
+
             <ScrollViewer VerticalScrollBarVisibility="Auto">
+
                 <ListView Grid.Row="1" Height="350"
-                          ItemsSource="{Binding FeedItems}"
+                          ItemsSource="{Binding FeedItems, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding SelectedFeedItem}"/>
+
             </ScrollViewer>
         </StackPanel>
 
-        <WebBrowser Grid.Row="1" Grid.Column="1" 
-               attached:BrowserBehavior.Html="{Binding SelectedFeedItem.Content.Text}"/>
+        <GridSplitter Grid.Row="1" Grid.Column="1" ResizeDirection="Columns" Width="5" HorizontalAlignment="Stretch"/>
+
+        <chrome:ChromiumWebBrowser Grid.Row="1" Grid.Column="2">
+            <chrome:ChromiumWebBrowser.BrowserSettings>
+                <cefsharp:BrowserSettings DefaultEncoding="UTF-8"/>
+            </chrome:ChromiumWebBrowser.BrowserSettings>
+            <chrome:ChromiumWebBrowser.Style>
+                <Style TargetType="{x:Type chrome:ChromiumWebBrowser}">
+                    <Setter Property="attached:BrowserBehavior.Html" Value="{Binding SelectedFeedItem.FeedItem.Content.Text}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding SelectedFeedItem.HasImage}" Value="true">
+                            <Setter Property="attached:BrowserBehavior.Html" Value="{Binding SelectedFeedItem.ImageURL}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </chrome:ChromiumWebBrowser.Style>
+        </chrome:ChromiumWebBrowser>
     </Grid>
 </UserControl>

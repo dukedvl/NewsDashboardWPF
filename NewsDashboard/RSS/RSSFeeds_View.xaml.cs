@@ -24,6 +24,14 @@ namespace NewsDashboard.RSS
             InitializeComponent();
         }
 
- 
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(
+                new ProcessStartInfo("cmd", $"/c start {e.Uri.AbsoluteUri}")
+                {
+                    CreateNoWindow = true
+                });
+            e.Handled = true;
+        }
     }
 }
