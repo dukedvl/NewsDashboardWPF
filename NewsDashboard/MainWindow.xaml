@@ -16,10 +16,13 @@
                 <news:News_View></news:News_View>
             </TabItem>
             <TabItem>
-                <TabItem.Header>
-                    RSS/Comics
-                </TabItem.Header>
-                <rss:RSSFeeds_View></rss:RSSFeeds_View>
+                <TabItem.Header>Comics</TabItem.Header>
+                <rss:ComicFeeds_View/>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>Blogs</TabItem.Header>
+                <rss:BlogFeeds_View/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>About</TabItem.Header>

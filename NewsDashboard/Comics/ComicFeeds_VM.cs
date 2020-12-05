@@ -1,29 +1,23 @@
 ﻿using NewsDashboard.Common;
 using Prism.Commands;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 using System.ServiceModel.Syndication;
-using System.Text;
 using System.Windows.Input;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace NewsDashboard.RSS
 {
-    public class RSSFeeds_VM : BaseViewModel
+    public class ComicFeeds_VM : BaseViewModel
     {
         #region Properties
 
-        public string Title => "RSS Feeds";
+        public string Title => "Comics";
 
         public string FeedURL
         {
             get;
             set;
-        } = "http://blog.cleancoder.com/atom.xml";
+        } = "http://comicfeeds.chrisbenard.net/view/dilbert/default";
 
         public ObservableCollection<FeedItemModel> FeedItems
         {
@@ -37,6 +31,10 @@ namespace NewsDashboard.RSS
             set;
         }
 
+        //Prepopulated Comics:
+        // http://comicfeeds.chrisbenard.net/view/dilbert/default
+        // CommitStrip
+        //
         #endregion
 
         #region Commands
@@ -63,19 +61,7 @@ namespace NewsDashboard.RSS
                 //Next step, getting Images from Comic feeds/etc.
                 foreach (SyndicationItem item in feed.Items)
                 {
-                    FeedItemModel model = new FeedItemModel()
-                    {
-                        FeedItem = item
-                    };
-
-                    model.ImageURL =
-                        (from SyndicationElementExtension ext in item.ElementExtensions
-                         let Extension = ext.GetObject<XElement>()
-                         where Extension?.Name?.LocalName == "encoded" &&
-                         !string.IsNullOrEmpty(Extension?.Value)
-                         select Extension.Value).FirstOrDefault();
-
-                    FeedItems.Add(model);
+                    FeedItems.Add(FeedItemModel.FromSyndicationItem(item));
                 }
             }
 

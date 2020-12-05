@@ -1,37 +1,23 @@
 ﻿using NewsDashboard.Common;
-using NewsDashboard.RSS;
 using Prism.Commands;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel.Syndication;
-using System.Text;
 using System.Windows.Input;
 using System.Xml;
 
-namespace NewsDashboard.News
+namespace NewsDashboard.RSS
 {
-    public class News_VM : BaseViewModel
+    public class BlogFeeds_VM : BaseViewModel
     {
         #region Properties
 
-        public string Title
-        {
-            get;
-            set;
-        } = "News";
+        public string Title => "Blogs";
 
         public string FeedURL
         {
             get;
             set;
-        } = "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
-
-        public string FeedImg
-        {
-            get;
-            set;
-        }
+        } = "http://blog.cleancoder.com/atom.xml";
 
         public ObservableCollection<FeedItemModel> FeedItems
         {
@@ -72,8 +58,6 @@ namespace NewsDashboard.News
             {
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
 
-                Title = feed.Title.Text;
-                FeedImg = feed?.ImageUrl?.AbsoluteUri;
                 //Next step, getting Images from Comic feeds/etc.
                 foreach (SyndicationItem item in feed.Items)
                 {
@@ -85,6 +69,6 @@ namespace NewsDashboard.News
 
         }
         #endregion
-
+      
     }
 }

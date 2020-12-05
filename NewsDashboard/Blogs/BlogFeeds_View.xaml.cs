@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NewsDashboard.News
+namespace NewsDashboard.RSS
 {
     /// <summary>
-    /// Interaction logic for News_View.xaml
+    /// Interaction logic for BlogFeeds_View.xaml
     /// </summary>
-    public partial class News_View : UserControl
+    public partial class BlogFeeds_View : UserControl
     {
-        public News_View()
+        public BlogFeeds_View()
         {
             InitializeComponent();
         }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace NewsDashboard.RSS
 {
     /// <summary>
-    /// Interaction logic for RSSFeeds.xaml
+    /// Interaction logic for ComicFeeds_View.xaml
     /// </summary>
-    public partial class RSSFeeds_View : UserControl
+    public partial class ComicFeeds_View : UserControl
     {
-        public RSSFeeds_View()
+        public ComicFeeds_View()
         {
             InitializeComponent();
         }
