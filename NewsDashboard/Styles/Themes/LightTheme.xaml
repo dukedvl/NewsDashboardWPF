@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <SolidColorBrush x:Key="Background">White</SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonBackground">#d3d3d3</SolidColorBrush>
+    <SolidColorBrush x:Key="Text">Black</SolidColorBrush>
+    <SolidColorBrush x:Key="Link">Blue</SolidColorBrush>
+    <SolidColorBrush x:Key="PanelBackground">White</SolidColorBrush>
+    
+</ResourceDictionary>

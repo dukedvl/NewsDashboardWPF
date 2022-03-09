@@ -12,11 +12,12 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <Style TargetType="ListView">
+            <Setter Property="Background" Value="{DynamicResource Background}"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
-                    <DataTemplate DataType="{x:Type ListView}">
+                    <DataTemplate DataType="{x:Type ListViewItem}">
                         <StackPanel Orientation="Horizontal">
-                            <Ellipse Height="5" Width="5" Fill="Black"/>
+                            <Ellipse Height="5" Width="5" Fill="{DynamicResource Text}"/>
                             <TextBlock Margin="5" FontSize="14" Text="{Binding }"/>
                         </StackPanel>
                     </DataTemplate>
@@ -43,11 +44,6 @@
             <TextBlock FontSize="14" Margin="5">
                 <Bold>News Dashboard</Bold> is a development project to display some proficiency in:
             </TextBlock>
-            
-            <!-- Using a List View control here, a RichText/FlowDocument would be a little prettier here,
-            however these controls are archaic in WPF world, and don't support databinding or templating.. 
-            
-            Much less elegant/ tons of copy-paste and hardcoded text content-->
             
             <ListView Grid.Row="2" Width="400" HorizontalAlignment="Left" Margin="5"
                       ItemsSource="{Binding Proficiencies}"/>

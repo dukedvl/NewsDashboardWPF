@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CefSharp;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -32,6 +33,14 @@ namespace NewsDashboard.RSS
                     CreateNoWindow = true
                 });
             e.Handled = true;
+        }
+
+        private void browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            browser.ExecuteScriptAsyncWhenPageLoaded(
+    $"document.body.style.color = '#{App.Current.Resources["Text"].ToString().Substring(3, 6)}';" +
+    $"document.a.style.color = 'green';");
+            //{App.Current.Resources["Text"]}
         }
     }
 }

@@ -8,26 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="obj\" />
-    <Folder Include="Styles\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="ValueConverters\" />
+    <Compile Remove="Commands\**" />
+    <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="Commands\**" />
+    <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="Commands\**" />
+    <None Remove="Utilities\**" />
+    <Page Remove="Commands\**" />
+    <Page Remove="Utilities\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf" Version="86.0.241" />
-    <PackageReference Include="Fody" Version="6.3.0">
+    <Folder Include="obj\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Common.NETCore" Version="98.1.210" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="98.1.210" />
+    <PackageReference Include="Fody" Version="6.6.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.3.1" />
-    <PackageReference Include="System.ServiceModel.Syndication" Version="5.0.0" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Page Update="Blogs\BlogFeeds_View.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Themes\DarkTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

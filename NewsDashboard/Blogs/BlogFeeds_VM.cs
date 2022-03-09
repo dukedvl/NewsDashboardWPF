@@ -1,6 +1,7 @@
 ﻿using NewsDashboard.Common;
 using Prism.Commands;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Windows.Input;
 using System.Xml;
@@ -45,7 +46,7 @@ namespace NewsDashboard.RSS
         {
             get
             {
-                return _loadFeed ?? (_loadFeed = new DelegateCommand(() => LoadAction()));
+                return _loadFeed ??= new DelegateCommand(() => LoadAction());
             }
         }
 

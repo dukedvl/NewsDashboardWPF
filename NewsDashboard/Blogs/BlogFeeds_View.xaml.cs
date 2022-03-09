@@ -1,6 +1,10 @@
-﻿using System;
+﻿using CefSharp;
+using CefSharp.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +14,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NewsDashboard.RSS
 {
@@ -32,6 +35,15 @@ namespace NewsDashboard.RSS
                     CreateNoWindow = true
                 });
             e.Handled = true;
+
+        }
+
+        private void chromeBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            chromeBrowser.ExecuteScriptAsyncWhenPageLoaded(
+              $"document.body.style.color = '#{App.Current.Resources["Text"].ToString().Substring(3, 6)}';" +
+              $"document.a.style.color = 'green';");
+            //{App.Current.Resources["Text"]}
         }
     }
 }

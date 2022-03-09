@@ -20,7 +20,7 @@ namespace NewsDashboard.Common
         {
             get
             {
-                if(FeedItem.LastUpdatedTime.LocalDateTime!= DateTime.MinValue)
+                if (FeedItem.LastUpdatedTime.LocalDateTime != DateTime.MinValue)
                 {
                     return FeedItem.LastUpdatedTime.LocalDateTime;
                 }
@@ -57,6 +57,17 @@ namespace NewsDashboard.Common
                  !string.IsNullOrEmpty(Extension?.Value)
                  select Extension.Value).FirstOrDefault();
 
+            if (model.ImageURL == null)
+            {
+                try
+                {
+                    model.ImageURL = ((TextSyndicationContent)item?.Content)?.Text;
+                }
+                catch
+                {
+
+                }
+            }
             return model;
         }
     }

@@ -8,12 +8,41 @@
         xmlns:rss="clr-namespace:NewsDashboard.RSS"
         xmlns:about="clr-namespace:NewsDashboard.About"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="News Dashboard" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindow_VM/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+            <StackPanel Margin="-10,0,0,0" Background="{DynamicResource PanelBackground}"/>
+        </ItemsPanelTemplate>
+        
+        <Style TargetType="MenuItem">
+            <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
+
+        </Style>
+    </Window.Resources>
     <Grid>
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+            
+        <Menu Grid.Row="0" Background="{DynamicResource Background}">
+            <MenuItem Header="File">
+                <MenuItem Header="Preferences" Command="{Binding ShowPreferences}"/>
+                <MenuItem Header="Exit" Command="{Binding ExitProgram}"/>
+            </MenuItem>
+        </Menu>
+        <TabControl Grid.Row="1">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type Grid}">
+                    <Setter Property="Background" Value="{DynamicResource Background}"/>
+                </Style>
+            </TabControl.Resources>
             <TabItem>
                 <TabItem.Header>News</TabItem.Header>
-                <news:News_View></news:News_View>
+                <news:News_View/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Comics</TabItem.Header>
@@ -26,7 +55,7 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>About</TabItem.Header>
-                <about:About_View></about:About_View>
+                <about:About_View/>
             </TabItem>
         </TabControl>
     </Grid>

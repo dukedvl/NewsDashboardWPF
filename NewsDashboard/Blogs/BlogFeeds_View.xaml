@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:NewsDashboard.RSS"
              xmlns:common="clr-namespace:NewsDashboard.Common"
              xmlns:attached="clr-namespace:NewsDashboard.AttachedProperties"
-             xmlns:chrome="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf" xmlns:cefsharp="clr-namespace:CefSharp;assembly=CefSharp.Core"
+             xmlns:chrome="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+             xmlns:cefsharp="clr-namespace:CefSharp;assembly=CefSharp.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" 
-             d:DataContext="{d:DesignInstance Type=local:BlogFeeds_VM, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=local:BlogFeeds_VM, IsDesignTimeCreatable=True}" >
 
     <UserControl.DataContext>
         <local:BlogFeeds_VM/>
@@ -17,13 +18,24 @@
 
     <UserControl.Resources>
         <Style TargetType="ListView">
+            <Setter Property="Background" Value="{DynamicResource Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Text}"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate DataType="{x:Type common:FeedItemModel}">
                         <StackPanel>
-                            <TextBlock Text="{Binding FeedItem.Title.Text}"/>
-                            <TextBlock><Hyperlink NavigateUri="{Binding FeedItem.Id}" RequestNavigate="Hyperlink_RequestNavigate">Link</Hyperlink> (<Run FontSize="10" FontStyle="Italic" Text="{Binding FeedItem.LastUpdatedTime.LocalDateTime, Mode=OneWay}"/>)</TextBlock>
-
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Background" Value="{DynamicResource Background}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource PanelBackground}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <TextBlock Text="{Binding FeedItem.Title.Text, Mode=OneWay}"/>
+                            <TextBlock><Hyperlink NavigateUri="{Binding Path=FeedItem.Id}" RequestNavigate="Hyperlink_RequestNavigate">Link</Hyperlink> (<Run FontSize="10" FontStyle="Italic" Text="{Binding Path=ItemTime, Mode=OneWay}"/>)</TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </Setter.Value>
@@ -41,7 +53,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="24" Text="{Binding Title}"/>
+        <TextBlock FontSize="24" Text="{Binding Title}" Margin="5"/>
 
         <StackPanel Grid.Row="1">
 
@@ -55,7 +67,7 @@
             </Grid>
 
             <Button Command="{Binding LoadFeed}" Content="Load Feed" 
-                    Margin="5" MinWidth="75" MaxWidth="150"/>
+                    Margin="5" MinWidth="75" MaxWidth="150" Style="{StaticResource BaseButton}"/>
 
             <ScrollViewer VerticalScrollBarVisibility="Auto">
 
@@ -68,13 +80,14 @@
 
         <GridSplitter Grid.Row="1" Grid.Column="1" ResizeDirection="Columns" Width="5" HorizontalAlignment="Stretch"/>
 
-        <chrome:ChromiumWebBrowser Grid.Row="1" Grid.Column="2">
-            <chrome:ChromiumWebBrowser.BrowserSettings>
-                <cefsharp:BrowserSettings DefaultEncoding="UTF-8"/>
-            </chrome:ChromiumWebBrowser.BrowserSettings>
+        <chrome:ChromiumWebBrowser Grid.Row="1" Grid.Column="2" x:Name="chromeBrowser" Foreground="{DynamicResource Text}" LoadingStateChanged="chromeBrowser_LoadingStateChanged">
             <chrome:ChromiumWebBrowser.Style>
                 <Style TargetType="{x:Type chrome:ChromiumWebBrowser}">
                     <Setter Property="attached:BrowserBehavior.Html" Value="{Binding SelectedFeedItem.FeedItem.Content.Text}"/>
+                    <Setter Property="Background" Value="{DynamicResource Background}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+
+                    <Setter Property="FontSize" Value="16"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding SelectedFeedItem.HasImage}" Value="true">
                             <Setter Property="attached:BrowserBehavior.Html" Value="{Binding SelectedFeedItem.ImageURL}"/>

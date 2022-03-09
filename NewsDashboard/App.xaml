@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:NewsDashboard"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Themes/DarkTheme.xaml"/>
+                <ResourceDictionary Source="Styles/DataTemplates/PreferenceTemplates.xaml"/>
+                <ResourceDictionary Source="Styles/CommonStyling.xaml"/>
+                <ResourceDictionary Source="ValueConverters/ValueConverters.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
