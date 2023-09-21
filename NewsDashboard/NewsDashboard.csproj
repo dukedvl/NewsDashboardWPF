@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="98.1.210" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="116.0.230" />
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="98.1.210" />
     <PackageReference Include="Fody" Version="6.6.0">
       <PrivateAssets>all</PrivateAssets>
