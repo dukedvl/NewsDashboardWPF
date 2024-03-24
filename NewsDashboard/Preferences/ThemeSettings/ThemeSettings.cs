@@ -12,7 +12,7 @@ namespace NewsDashboard.Preferences
     {
         public string GroupName
         {
-            get => "Themes";
+            get => "Display";
         }
 
         public string Name
@@ -37,7 +37,7 @@ namespace NewsDashboard.Preferences
         {
             get
             {
-                return _applyTheme ?? (_applyTheme = new DelegateCommand(() => applyThemeAction()));
+                return _applyTheme ??= new DelegateCommand(() => applyThemeAction());
             }
         }
 

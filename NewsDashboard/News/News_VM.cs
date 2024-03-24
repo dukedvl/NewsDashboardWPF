@@ -1,5 +1,4 @@
 ﻿using NewsDashboard.Common;
-using NewsDashboard.RSS;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Text;
 using System.Windows.Input;
 using System.Xml;
 
-namespace NewsDashboard.News
+namespace NewsDashboard.RSS
 {
     public class News_VM : BaseViewModel
     {

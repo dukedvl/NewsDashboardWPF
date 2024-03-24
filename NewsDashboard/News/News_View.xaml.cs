@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NewsDashboard.News
+namespace NewsDashboard.RSS
 {
     /// <summary>
     /// Interaction logic for News_View.xaml

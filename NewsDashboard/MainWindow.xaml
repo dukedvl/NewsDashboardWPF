@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NewsDashboard" 
-        xmlns:news="clr-namespace:NewsDashboard.News"
         xmlns:rss="clr-namespace:NewsDashboard.RSS"
         xmlns:about="clr-namespace:NewsDashboard.About"
         mc:Ignorable="d"
@@ -42,7 +41,7 @@
             </TabControl.Resources>
             <TabItem>
                 <TabItem.Header>News</TabItem.Header>
-                <news:News_View/>
+                <rss:News_View/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Comics</TabItem.Header>
@@ -52,6 +51,15 @@
             <TabItem>
                 <TabItem.Header>Blogs</TabItem.Header>
                 <rss:BlogFeeds_View/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Weather</TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Stocks</TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Sports</TabItem.Header>
             </TabItem>
             <TabItem>
                 <TabItem.Header>About</TabItem.Header>

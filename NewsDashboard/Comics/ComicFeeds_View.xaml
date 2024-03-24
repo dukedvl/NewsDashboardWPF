@@ -40,12 +40,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <Style TargetType="Button" BasedOn="{StaticResource BaseButton}">
-            <Setter Property="Margin" Value="5 0"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource BaseButton}"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -66,7 +61,6 @@
             <Button>Dilbert</Button>
             <Button>Ctrl+Alt+Del</Button>
             <Button>Commit Strip</Button>
-            <Button>+</Button>
         </StackPanel>
         
         <StackPanel Grid.Row="2">

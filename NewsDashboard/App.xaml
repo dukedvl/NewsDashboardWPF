@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/Themes/DarkTheme.xaml"/>
+                <ResourceDictionary Source="Styles/Themes/LightTheme.xaml"/>
                 <ResourceDictionary Source="Styles/DataTemplates/PreferenceTemplates.xaml"/>
                 <ResourceDictionary Source="Styles/CommonStyling.xaml"/>
                 <ResourceDictionary Source="ValueConverters/ValueConverters.xaml"/>

@@ -9,6 +9,12 @@ namespace NewsDashboard
 {
     public class MainWindow_VM
     {
+        public PrefWindow_VM Preferences
+        {
+            get;
+            set;
+        }= new PrefWindow_VM();
+
         #region Commands
         private ICommand _showPreferences;
 
@@ -23,11 +29,13 @@ namespace NewsDashboard
 
         public void showPrefAction()
         {
-            PrefWindow_View pref = new PrefWindow_View();
-            pref.Owner= App.Current.MainWindow;
+            PrefWindow_View pref = new PrefWindow_View()
+            {
+                DataContext = Preferences,
+                Owner = App.Current.MainWindow,
+                WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner
+            };
 
-            pref.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
-            
             pref.ShowDialog();
         }
         
