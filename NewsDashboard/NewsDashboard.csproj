@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="118.6.80" />
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="118.6.80" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="134.3.90" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="134.3.90" />
     <PackageReference Include="Fody" Version="6.8.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
